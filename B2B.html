@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanan.co - Partnering for Global Success</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Color Palette */
+            --primary: #4F46E5;
+            /* Indigo */
+            --primary-light: #818CF8;
+            --secondary: #0EA5E9;
+            /* Sky Blue */
+            --accent-purple: #8B5CF6;
+            /* Violet */
+            --accent-green: #10B981;
+            /* Emerald */
+            --accent-amber: #F59E0B;
+            /* Amber */
+            --accent-pink: #F472B6;
+            /* Pink */
+
+            /* Text Colors (No pure black) */
+            --text-primary: #1E293B;
+            /* Slate 800 */
+            --text-secondary: #475569;
+            /* Slate 600 */
+            --text-light: #94A3B8;
+            /* Slate 400 */
+            --text-white: #F8FAFC;
+
+            /* Backgrounds */
+            --bg-gradient: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%);
+            --glass-bg: rgba(255, 255, 255, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+
+            /* Misc */
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* Abstract Background Decoration */
+        .bg-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.5;
+            z-index: -1;
+            animation: float 25s infinite ease-in-out;
+        }
+
+        .blob-1 {
+            top: -20%;
+            left: -20%;
+            width: 60vw;
+            height: 60vw;
+            background: var(--primary-light);
+        }
+
+        .blob-2 {
+            bottom: -20%;
+            right: -20%;
+            width: 50vw;
+            height: 50vw;
+            background: var(--secondary);
+            animation-delay: -5s;
+        }
+
+        .blob-3 {
+            top: 30%;
+            left: 30%;
+            width: 40vw;
+            height: 40vw;
+            background: var(--accent-purple);
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            50% {
+                transform: translate(40px, -40px) rotate(5deg);
+            }
+        }
+
+        /* Container */
+        #app-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Slides Wrapper */
+        .slides-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 1600px;
+            /* Increased max-width for "bulky" feel */
+            margin: 0 auto;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 6rem 3rem 8rem;
+            /* More vertical padding */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transform: scale(0.96) translateY(30px);
+            pointer-events: none;
+            transition: var(--transition);
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--text-light) transparent;
+        }
+
+        .slide-content-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: all;
+            z-index: 10;
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: -0.01em;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+            text-shadow: 0 10px 30px rgba(79, 70, 229, 0.15);
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-weight: 600;
+        }
+
+        /* Glass Cards */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            /* Removed height: 100% to allow auto-growth */
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 50px 0 rgba(31, 38, 135, 0.12);
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Compact/Dense Grid Layouts */
+        .grid-dense {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        .grid-4-col {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        @media (max-width: 1200px) {
+            .grid-4-col {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .grid-4-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Stats Styling */
+        .stat-card {
+            text-align: center;
+            border-top: 4px solid var(--accent-green);
+            padding: 2.5rem 1.5rem;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--accent-green);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Feature Icons */
+        .icon-box {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .navbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 85px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+            z-index: 100;
+            border: none;
+            border-radius: 0;
+        }
+
+        .nav-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 55px;
+            /* Slightly larger for corner touch targets */
+            height: 55px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .nav-btn:hover {
+            transform: scale(1.1);
+            background: var(--primary-light);
+        }
+
+        .progress-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 0.25rem;
+            max-width: 600px;
+            /* Limit width */
+            margin: 0 auto;
+        }
+
+        /* Responsive Fixes */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .slide {
+                padding: 4rem 1.5rem 8rem;
+            }
+
+            .grid-dense,
+            .grid-4-col {
+                grid-template-columns: 1fr;
+            }
+
+            .progress-wrapper {
+                display: none;
+                /* Hide progress on small screens if cluttered, or keep small? Keeping logic consistent with previous */
+            }
+        }
+
+        /* Dynamic Background Images */
+        .bg-blob {
+            display: none;
+        }
+
+        /* Slide Visibility & Layout logic */
+        .slide {
+            display: none;
+            /* Hide by default */
+            background: none;
+            overflow-y: auto !important;
+            /* ENABLE CONTENT SCROLLING */
+            overflow-x: hidden !important;
+            position: relative;
+            height: 100vh;
+            /* Ensure full height */
+            width: 100vw;
+            padding-top: 80px;
+            /* Space for navbar if needed */
+        }
+
+        .slide.active {
+            display: block;
+            /* Show only active slide */
+        }
+
+        /* GLOBAL FIXED BACKGROUNDS */
+        #global-bg-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(3px);
+            z-index: -10;
+            transition: background-image 0.5s ease-in-out;
+        }
+
+        #global-bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.7));
+            z-index: -9;
+            pointer-events: none;
+        }
+
+        /* Disable old pseudo-element backgrounds */
+        .slide::before,
+        .slide::after {
+            display: none !important;
+        }
+
+
+        /* Individual Mapping with CORRECT filenames */
+        .slides-container .slide:nth-child(1)::before {
+            background-image: url('slide_01_cover_1766146585446.png');
+        }
+
+        .slides-container .slide:nth-child(1)::after {
+            background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.5));
+        }
+
+        .slides-container .slide:nth-child(2)::before {
+            background-image: url('slide_02_market_1766146602557.png');
+        }
+
+        .slides-container .slide:nth-child(3)::before {
+            background-image: url('slide_03_challenge_1766146618851.png');
+        }
+
+        .slides-container .slide:nth-child(4)::before {
+            background-image: url('slide_04_solution_1766146639045.png');
+        }
+
+        .slides-container .slide:nth-child(5)::before {
+            background-image: url('slide_05_science_1766146666043.png');
+        }
+
+        .slides-container .slide:nth-child(6)::before {
+            background-image: url('slide_06_portfolio_1766146706556.png');
+        }
+
+        .slides-container .slide:nth-child(7)::before {
+            background-image: url('slide_07_formats_1766146722550.png');
+        }
+
+        .slides-container .slide:nth-child(8)::before {
+            background-image: url('slide_08_partnership_1766146737911.png');
+        }
+
+        .slides-container .slide:nth-child(9)::before {
+            background-image: url('slide_09_pricing_1on1_1766146755758.png');
+        }
+
+        .slides-container .slide:nth-child(10)::before {
+            background-image: url('slide_10_pricing_group_1766146772727.png');
+        }
+
+        .slides-container .slide:nth-child(11)::before {
+            background-image: url('slide_11_benefits_1766146811097.png');
+        }
+
+        .slides-container .slide:nth-child(12)::before {
+            background-image: url('slide_12_success_1766146829991.png');
+        }
+
+        .slides-container .slide:nth-child(13)::before {
+            background-image: url('slide_13_cta_1766146850447.png');
+        }
+
+        .slides-container .slide:nth-child(14)::before {
+            background-image: url('slide_01_cover_1766146585446.png');
+        }
+    </style>
+</head>
+
+<body>
+    <div id="global-bg-image"></div>
+    <div id="global-bg-overlay"></div>
+
+
+    <div id="app-container">
+        <div class="slides-container">
+
+            <!-- Slide 0: Executive Summary -->
+            <div class="slide active">
+                <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 2rem;">
+                    <img src="https://ik.imagekit.io/1rs0mzzlk/KANAN%20LOGO.png?updatedAt=1759653336381" alt="Kanan.co"
+                        style="height: 60px; margin-bottom: 0.5rem;">
+                    <div
+                        style="background: linear-gradient(90deg, #4f46e5, #ec4899); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 900; font-size: 2.5rem; letter-spacing: 2px; font-family: 'Outfit', sans-serif;">
+                        PREMIUM PERSONALIZED BATCH
+                    </div>
+                </div>
+
+                <div class="slide-content-wrapper">
+                    <h1 class="section-title" style="margin-bottom: 1rem; font-size: 2.75rem;">Partnering for<br>Global
+                        Success
+                    </h1>
+
+                    <p class="section-subtitle" style="font-size: 1.3rem; margin-bottom: 2rem; max-width: 900px;">
+                        Introducing the Kanan.co Premium Personalized Batch: A Scientific Approach to Elevate Your
+                        Clients' Potential
+                    </p>
+
+                    <div
+                        style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2.5rem; max-width: 900px;">
+                        <!-- Highlighted Feature Tags with Icons & Interaction -->
+                        <div class="benefit-pill"
+                            style="background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); color: var(--primary); padding: 0.6rem 1.2rem; border-radius: 50px; font-weight: 700; font-size: 0.95rem; border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 4px 10px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease; cursor: default;">
+                            <i class="fas fa-laptop" style="color: #4f46e5;"></i> Online
+                        </div>
+                        <div class="benefit-pill"
+                            style="background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); color: var(--primary); padding: 0.6rem 1.2rem; border-radius: 50px; font-weight: 700; font-size: 0.95rem; border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 4px 10px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease; cursor: default;">
+                            <i class="fas fa-chalkboard-teacher" style="color: #ec4899;"></i> Offline
+                        </div>
+                        <div class="benefit-pill"
+                            style="background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); color: var(--primary); padding: 0.6rem 1.2rem; border-radius: 50px; font-weight: 700; font-size: 0.95rem; border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 4px 10px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease; cursor: default;">
+                            <i class="fas fa-history" style="color: #f59e0b;"></i> Self-Paced
+                        </div>
+                        <div class="benefit-pill"
+                            style="background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); color: var(--primary); padding: 0.6rem 1.2rem; border-radius: 50px; font-weight: 700; font-size: 0.95rem; border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 4px 10px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease; cursor: default;">
+                            <i class="fas fa-play-circle" style="color: #ef4444;"></i> Recorded Lectures
+                        </div>
+                        <div class="benefit-pill"
+                            style="background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); color: var(--primary); padding: 0.6rem 1.2rem; border-radius: 50px; font-weight: 700; font-size: 0.95rem; border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 4px 10px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease; cursor: default;">
+                            <i class="fas fa-clipboard-check" style="color: #10b981;"></i> Mock Tests
+                        </div>
+                        <div class="benefit-pill"
+                            style="background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); color: var(--primary); padding: 0.6rem 1.2rem; border-radius: 50px; font-weight: 700; font-size: 0.95rem; border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 4px 10px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease; cursor: default;">
+                            <i class="fas fa-book-open" style="color: #8b5cf6;"></i> Grammar Videos
+                        </div>
+                    </div>
+                    <style>
+                        .benefit-pill:hover {
+                            transform: translateY(-3px) scale(1.05);
+                            background: white !important;
+                            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15) !important;
+                        }
+                    </style>
+
+                    <div class="glass-card"
+                        style="max-width: 900px; text-align: center; background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%); color: white; border: none; box-shadow: 0 10px 25px rgba(109, 40, 217, 0.3); padding: 2.5rem;">
+                        <h3 style="margin-bottom: 1rem; color: white; font-size: 1.8rem; font-weight: 700;">India: The
+                            Launchpad for Global Success</h3>
+                        <p style="font-size: 1.2rem; line-height: 1.6; color: rgba(255,255,255,0.95);">
+                            Every year, 10 lakh+ Indian students dream of studying abroad. We're here to make every
+                            single
+                            dream a reality through scientifically-proven personalized excellence that transforms
+                            potential
+                            into achievement.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 1: Mission -->
+            <div class="slide">
+                <div class="slide-content-wrapper">
+                    <h2 class="section-title">Our Shared Mission in a High-Growth Market</h2>
+                    <p class="section-subtitle" style="max-width: 1000px;">
+                        Every year, more than 10 lakh Indian students dream of studying abroad. Together, we can
+                        transform every single dream into a reality.
+                    </p>
+
+                    <div
+                        style="position: relative; width: 100%; max-width: 1200px; height: 400px; margin-bottom: 2rem;">
+                        <!-- Stylized Map Background (CSS Representation) -->
+                        <div
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(#cbd5e1 1px, transparent 1px); background-size: 20px 20px; opacity: 0.3;">
+                        </div>
+
+                        <!-- Connection Lines (Decorative) -->
+                        <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
+                            <path d="M 600 250 Q 300 100 200 150" fill="none" stroke="#fbbf24" stroke-width="2"
+                                stroke-dasharray="8 4" />
+                            <path d="M 600 250 Q 800 100 900 150" fill="none" stroke="#fbbf24" stroke-width="2"
+                                stroke-dasharray="8 4" />
+                            <path d="M 600 250 Q 500 350 750 350" fill="none" stroke="#fbbf24" stroke-width="2"
+                                stroke-dasharray="8 4" />
+                        </svg>
+
+                        <!-- Stats Overlay -->
+                        <div class="grid-dense" style="position: relative; top: 50px;">
+                            <div class="glass-card stat-card" style="border: none; background: rgba(255,255,255,0.8);">
+                                <div class="icon-box"
+                                    style="margin: 0 auto 1rem; background: transparent; font-size: 2rem; color: var(--primary);">
+                                    <i class="fas fa-user-graduate"></i>
+                                </div>
+                                <div class="stat-number">13 Lakh+</div>
+                                <div style="color: var(--text-secondary); font-weight: 600;">Indian Students Currently
+                                    Studying Abroad</div>
+                            </div>
+
+                            <div class="glass-card stat-card" style="border: none; background: rgba(255,255,255,0.8);">
+                                <div class="icon-box"
+                                    style="margin: 0 auto 1rem; background: transparent; font-size: 2rem; color: var(--accent-green);">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="stat-number">₹75 Lakh Cr</div>
+                                <div style="color: var(--text-secondary); font-weight: 600;">Annual Student Outflow from
+                                    India</div>
+                            </div>
+
+                            <div class="glass-card stat-card" style="border: none; background: rgba(255,255,255,0.8);">
+                                <div class="icon-box"
+                                    style="margin: 0 auto 1rem; background: transparent; font-size: 2rem; color: var(--secondary);">
+                                    <i class="fas fa-globe-americas"></i>
+                                </div>
+                                <div class="stat-number">125+</div>
+                                <div style="color: var(--text-secondary); font-weight: 600;">Countries Welcoming Indian
+                                    Talent</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: The Challenge -->
+            <div class="slide">
+                <div class="slide-content-wrapper">
+                    <h2 class="section-title">The Challenge</h2>
+                    <p class="section-subtitle">Why 'One-Size-Fits-All' Coaching Fails Your Clients</p>
+
+                    <div class="grid-4-col" style="margin-bottom: 2rem;">
+                        <div class="glass-card" style="text-align: left;">
+                            <div class="icon-box" style="background: #fee2e2; color: #ef4444;"><i
+                                    class="fas fa-book-open"></i></div>
+                            <h4>Generic Curriculum</h4>
+                            <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-secondary);">
+                                'Rote Learning' background is incompatible with critical thinking tests.
+                            </p>
+                        </div>
+                        <div class="glass-card" style="text-align: left;">
+                            <div class="icon-box" style="background: #ffedd5; color: #f97316;"><i
+                                    class="fas fa-users"></i></div>
+                            <h4>Peer Pressure</h4>
+                            <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-secondary);">
+                                Anxiety in large groups hampers actual learning and progress.
+                            </p>
+                        </div>
+                        <div class="glass-card" style="text-align: left;">
+                            <div class="icon-box" style="background: #f1f5f9; color: #64748b;"><i
+                                    class="fas fa-question-circle"></i></div>
+                            <h4>No Personal Attention</h4>
+                            <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-secondary);">
+                                Specific weaknesses go unresolved, leading to knowledge gaps.
+                            </p>
+                        </div>
+                        <div class="glass-card" style="text-align: left;">
+                            <div class="icon-box" style="background: #ebe9fe; color: #7c3aed;"><i
+                                    class="fas fa-comment-slash"></i></div>
+                            <h4>Confidence Barrier</h4>
+                            <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-secondary);">
+                                Fear of judgment prevents students from practicing spoken English.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card" style="width: 100%; border-left: 6px solid #b45309; background: #fffbeb;">
+                        <h4 style="color: #92400e; margin-bottom: 0.5rem;">The Bottom Line for the Agent:</h4>
+                        <p style="color: #b45309;">
+                            This leads to <strong>mediocre results</strong>, <strong>unsatisfied clients</strong>, and a
+                            risk to your business reputation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: The Solution -->
+            <div class="slide">
+                <div class="slide-content-wrapper">
+                    <h2 class="section-title">The Solution</h2>
+                    <p class="section-subtitle">A Differentiated Offering for Your Portfolio</p>
+
+                    <div class="glass-card"
+                        style="display: flex; flex-direction: row; flex-wrap: nowrap; gap: 4rem; width: 100%; align-items: center; justify-content: space-between; margin-bottom: 3rem; padding: 3rem;">
+                        <div style="flex: 1; text-align: left; min-width: 0;">
+                            <h3
+                                style="color: var(--primary); font-size: 2rem; font-weight: 700; line-height: 1.2; margin-bottom: 1.5rem;">
+                                Offer the First-of-its-Kind Personalized Prep Solution in India</h3>
+                            <p
+                                style="font-size: 1rem; color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.6;">
+                                While traditional group study often imposes a one-size-fits-all approach, personalized
+                                preparation addresses each student's unique strengths, weaknesses, and pace. Recognizing
+                                this, we offer the first-of-its-kind personalized prep solution in India.
+                            </p>
+                            <p style="font-size: 1rem; color: var(--text-secondary); line-height: 1.6;">
+                                Our platform uses adaptive learning technology to create a custom study plan for every
+                                individual. It focuses precisely on their knowledge gaps, provides tailored practice,
+                                and maximizes efficiency.
+                            </p>
+                        </div>
+                        <div style="flex: 1; display: flex; justify-content: center; min-width: 0;">
+                            <!-- 1:1 Focus Image from User -->
+                            <img src="./slide3_people_image.jpg" alt="1:1 Focus Illustration"
+                                style="width: 100%; max-height: 400px; object-fit: cover; object-position: center; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+                        </div>
+                    </div>
+
+                    <div class="grid-dense">
+                        <div class="glass-card" style="text-align: center;">
+                            <div class="stat-number" style="color: var(--accent-amber);">96%</div>
+                            <div style="font-weight: 600;">First Attempt Success</div>
+                        </div>
+                        <div class="glass-card" style="text-align: center;">
+                            <div class="stat-number" style="color: var(--secondary);">1,500+</div>
+                            <div style="font-weight: 600;">Success Stories in 2 Years</div>
+                        </div>
+                        <div class="glass-card" style="text-align: center;">
+                            <div class="stat-number" style="color: var(--primary);">3X</div>
+                            <div style="font-weight: 600;">Faster Learning vs. Group</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: The Science -->
+            <div class="slide">
+                <div class="slide-content-wrapper">
+                    <h2 class="section-title">The Science</h2>
+                    <p class="section-subtitle">Our Results Are Not Accidental; They're Scientific</p>
+
+                    <div class="grid-dense" style="align-items: stretch;">
+                        <!-- Bloom's 2 Sigma -->
+                        <div class="glass-card">
+                            <h4 style="margin-bottom: 1rem;">Bloom's 2-Sigma Discovery</h4>
+                            <div style="height: 150px; position: relative; margin-bottom: 1rem;">
+                                <svg width="100%" height="100%" viewBox="0 0 200 100" preserveAspectRatio="none">
+                                    <!-- Curve 1 -->
+                                    <path d="M 10 90 Q 50 10 90 90" fill="none" stroke="#94a3b8" stroke-width="3" />
+                                    <text x="50" y="98" text-anchor="middle" font-size="10"
+                                        fill="#64748b">Classroom</text>
+                                    <!-- Curve 2 -->
+                                    <path d="M 60 90 Q 100 10 140 90" fill="none" stroke="#4f46e5" stroke-width="3" />
+                                    <text x="100" y="98" text-anchor="middle" font-size="10" fill="#4f46e5">1:1
+                                        Tutored</text>
+                                    <!-- Arrow -->
+                                    <path d="M 50 40 L 90 40" stroke="#fbbf24" stroke-width="2"
+                                        marker-end="url(#arrow)" />
+                                    <text x="70" y="35" text-anchor="middle" font-size="8" fill="#fbbf24">+2σ</text>
+                                </svg>
+                            </div>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary);">
+                                1:1 tutored students perform <strong>two standard deviations better</strong> than
+                                classroom students.
+                            </p>
+                        </div>
+
+                        <!-- Forgetting Curve -->
+                        <div class="glass-card">
+                            <h4 style="margin-bottom: 1rem;">Ebbinghaus Forgetting Curve</h4>
+                            <div style="height: 150px; position: relative; margin-bottom: 1rem;">
+                                <svg width="100%" height="100%" viewBox="0 0 200 100" preserveAspectRatio="none">
+                                    <!-- Axes -->
+                                    <line x1="10" y1="90" x2="190" y2="90" stroke="#ccc" stroke-width="1" />
+                                    <line x1="10" y1="10" x2="10" y2="90" stroke="#ccc" stroke-width="1" />
+                                    <!-- Drop Curve -->
+                                    <path d="M 10 10 Q 30 80 190 85" fill="none" stroke="#ef4444" stroke-width="2"
+                                        stroke-dasharray="4 2" />
+                                    <!-- Stabilization Curve -->
+                                    <path d="M 10 10 Q 50 20 90 25 T 190 30" fill="none" stroke="#10b981"
+                                        stroke-width="3" />
+                                    <circle cx="10" cy="10" r="3" fill="#10b981" />
+                                    <circle cx="50" cy="20" r="3" fill="#10b981" />
+                                    <circle cx="90" cy="25" r="3" fill="#10b981" />
+                                </svg>
+                            </div>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary);">
+                                Spaced repetition improves retention to <strong>over 90%</strong> compared to standard
+                                drop-off.
+                            </p>
+                        </div>
+
+                        <!-- Cognitive Load -->
+                        <div class="glass-card">
+                            <h4 style="margin-bottom: 1rem;">Cognitive Load Theory</h4>
+                            <div
+                                style="height: 150px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                                <i class="fas fa-brain" style="font-size: 5rem; color: var(--secondary);"></i>
+                                <i class="fas fa-arrow-left"
+                                    style="font-size: 2rem; color: var(--primary); margin-left: 1rem;"></i>
+                            </div>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary);">
+                                Eliminating distractions optimizes load, leading to <strong>40% better
+                                    retention</strong>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Complete Portfolio -->
+            <div class="slide">
+                <div class="slide-content-wrapper">
+                    <h2 class="section-title">Complete Portfolio</h2>
+                    <p class="section-subtitle">Comprehensive Test Prep & Language Solutions</p>
+
+                    <div class="grid-dense" style="margin-bottom: 2rem;">
+                        <div class="glass-card" style="grid-column: span 2; text-align: left;">
+                            <h3 style="color: var(--primary); margin-bottom: 1rem;">Core Study Abroad Tests</h3>
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                <div
+                                    style="background: #e0e7ff; color: #4338ca; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 700;">
+                                    IELTS </div>
+                                <div
+                                    style="background: #e0e7ff; color: #4338ca; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 700;">
+                                    CELPIP </div>
+                                <div
+                                    style="background: #e0e7ff; color: #4338ca; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 700;">
+                                    PTE</div>
+                                <div
+                                    style="background: #e0e7ff; color: #4338ca; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 700;">
+                                    TOEFL iBT</div>
+                                <div
+                                    style="background: #e0e7ff; color: #4338ca; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 700;">
+                                    Duolingo</div>
+                            </div>
+                        </div>
+                        <div class="glass-card" style="grid-column: span 1; text-align: left;">
+                            <h3 style="color: var(--secondary); margin-bottom: 1rem;">Aptitude</h3>
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                <div
+                                    style="background: #e0f2fe; color: #0369a1; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 700;">
+                                    Digital SAT</div>
+                                <div
+                                    style="background: #e0f2fe; color: #0369a1; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 700;">
+                                    GRE</div>
+                            </div>
+                        </div>
+                        <div class="glass-card" style="grid-column: span 1; text-align: left;">
+                            <h3 style="color: var(--accent-purple); margin-bottom: 1rem;">Languages</h3>
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                <div
+                                    style="background: #f3e8ff; color: #7e22ce; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 700;">
+                                    French (BASIC-B2+TEF)</div>
+                                <div
+                                    style="background: #f3e8ff; color: #7e22ce; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 700;">
+                                    German (BASIC-B2)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card" style="width: 100%; border-top: 4px solid var(--accent-green);">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <div>
+                                <h4 style="color: var(--text-primary);">Included in Every Course:</h4>
+                                <p style="color: var(--text-secondary);">Full-length Mock Tests, Sectional Practice,
+                                    Vocabulary Builders, and AI-Scored Speaking/Writing.</p>
+                            </div>
+                            <i class="fas fa-layer-group"
+                                style="font-size: 2.5rem; color: var(--accent-green); opacity: 0.2;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6: Flexible Formats -->
+            <div class="slide">
+                <div class="slide-content-wrapper">
+                    <h2 class="section-title">Flexible Delivery Formats</h2>
+                    <p class="section-subtitle">Choose the perfect fit for your client's needs</p>
+
+                    <div class="glass-card" style="width: 100%; overflow: visible; padding: 0;">
+                        <table style="width: 100%; border-collapse: collapse; min-width: 800px;">
+                            <thead>
+                                <tr style="background: var(--text-primary); color: white;">
+                                    <th
+                                        style="padding: 1.5rem; text-align: left; border-top-left-radius: 12px; width: 25%;">
+                                        Feature</th>
+                                    <th
+                                        style="padding: 1.5rem; text-align: center; width: 37.5%; border-right: 1px solid rgba(255,255,255,0.1);">
+                                        <div style="font-size: 1.2rem; color: #fbbf24; margin-bottom: 0.2rem;">Premium
+                                            Personalized</div>
+                                        <div style="font-size: 0.9rem; font-weight: 400; opacity: 0.8;">The Ultimate
+                                            Learning Experience</div>
+                                    </th>
+                                    <th
+                                        style="padding: 1.5rem; text-align: center; width: 37.5%; border-top-right-radius: 12px;">
+                                        <div style="font-size: 1.2rem; color: #60a5fa; margin-bottom: 0.2rem;">Premium
+                                            Small Group</div>
+                                        <div style="font-size: 0.9rem; font-weight: 400; opacity: 0.8;">Collaborative &
+                                            Cost-Effective</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 1.25rem; font-weight: 600; color: var(--text-primary);">Batch
+                                        Size</td>
+                                    <td
+                                        style="padding: 1.25rem; text-align: center; background: #fffbeb; font-weight: 700; color: #b45309;">
+                                        1 Student (1:1)</td>
+                                    <td
+                                        style="padding: 1.25rem; text-align: center; background: #eff6ff; font-weight: 700; color: #1e40af;">
+                                        2 - 5 Students</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 1.25rem; font-weight: 600; color: var(--text-primary);">Pacing
+                                    </td>
+                                    <td style="padding: 1.25rem; text-align: center; color: var(--text-secondary);">100%
+                                        Customized to Student Speed</td>
+                                    <td style="padding: 1.25rem; text-align: center; color: var(--text-secondary);">
+                                        Optimized Group Pace</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 1.25rem; font-weight: 600; color: var(--text-primary);">
+                                        Attention</td>
+                                    <td style="padding: 1.25rem; text-align: center; color: var(--text-secondary);">
+                                        Dedicated Mentor Focus</td>
+                                    <td style="padding: 1.25rem; text-align: center; color: var(--text-secondary);">
+                                        Shared Mentor Attention</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 1.25rem; font-weight: 600; color: var(--text-primary);">
+                                        Scheduling</td>
+                                    <td style="padding: 1.25rem; text-align: center; color: var(--text-secondary);">
+                                        Flexible Slots</td>
+                                    <td style="padding: 1.25rem; text-align: center; color: var(--text-secondary);">
+                                        Fixed Batch Timings</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 1.25rem; font-weight: 600; color: var(--text-primary);">Ideal
+                                        For</td>
+                                    <td style="padding: 1.25rem; text-align: center; color: var(--text-secondary);">Weak
+                                        students, High achievers, Busy schedules</td>
+                                    <td style="padding: 1.25rem; text-align: center; color: var(--text-secondary);">
+                                        Friends, Siblings, Budget-conscious</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Partnership Model -->
+            <div class="slide">
+                <div class="slide-content-wrapper">
+                    <h2 class="section-title">Partnership Model</h2>
+                    <p class="section-subtitle">We Succeed When You Succeed</p>
+
+                    <div
+                        style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%;">
+                        <div class="glass-card"
+                            style="padding: 4rem; display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 4rem; width: 100%; max-width: 1000px;">
+
+                            <!-- Pie Chart (Left) -->
+                            <div class="donut-chart"
+                                style="position: relative; width: 320px; height: 320px; border-radius: 50%; background: conic-gradient(#fbbf24 0% 30%, #1e1b4b 30% 100%); box-shadow: 0 10px 30px rgba(0,0,0,0.2); flex-shrink: 0; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
+                                <style>
+                                    @keyframes border-pulse {
+                                        0% {
+                                            box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.4);
+                                        }
+
+                                        70% {
+                                            box-shadow: 0 0 0 20px rgba(251, 191, 36, 0);
+                                        }
+
+                                        100% {
+                                            box-shadow: 0 0 0 0 rgba(251, 191, 36, 0);
+                                        }
+                                    }
+
+                                    .donut-chart:hover {
+                                        transform: scale(1.05) rotate(5deg);
+                                        animation: border-pulse 1.5s infinite;
+                                        cursor: pointer;
+                                    }
+                                </style>
+                                <!-- Inner Circle for Donut Effect -->
+                                <div
+                                    style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 200px; height: 200px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; padding: 1rem;">
+                                    <div style="font-size: 3.5rem; font-weight: 800; color: #fbbf24; line-height: 1;">
+                                        30%
+                                    </div>
+                                    <div style="font-size: 1.1rem; color: var(--text-secondary); font-weight: 600;">
+                                        Direct<br>Revenue Share</div>
+                                </div>
+                            </div>
+
+                            <!-- Legend/Text (Right) -->
+                            <div style="flex: 1; text-align: left;">
+                                <h3 style="font-size: 2.5rem; margin-bottom: 2rem; color: var(--text-primary);">
+                                    Lucrative
+                                    Commercials</h3>
+                                <div style="display: flex; align-items: flex-start; margin-bottom: 2rem;">
+                                    <div
+                                        style="width: 24px; height: 24px; background: #fbbf24; margin-right: 1.5rem; border-radius: 6px; margin-top: 5px; flex-shrink: 0;">
+                                    </div>
+                                    <div>
+                                        <h4 style="margin: 0; font-size: 1.4rem; color: var(--text-primary);">Partner
+                                            Share
+                                            (30%)</h4>
+                                        <p style="font-size: 1.1rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                                            Earn
+                                            ₹4,500 - ₹9,600 per enrollment immediately.</p>
+                                    </div>
+                                </div>
+                                <div style="display: flex; align-items: flex-start;">
+                                    <div
+                                        style="width: 24px; height: 24px; background: #1e1b4b; margin-right: 1.5rem; border-radius: 6px; margin-top: 5px; flex-shrink: 0;">
+                                    </div>
+                                    <div>
+                                        <h4 style="margin: 0; font-size: 1.4rem; color: var(--text-primary);">Kanan.co
+                                            Delivery</h4>
+                                        <p style="font-size: 1.1rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                                            We
+                                            handle 100% of operations, mentor costs, technology, and support.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8: B2B Fees 1:1 -->
+            <div class="slide">
+                <div class="slide-content-wrapper">
+                    <h2 class="section-title">Commercials: 1:1 Batch</h2>
+                    <p class="section-subtitle">Premium Personalized (Single Student)</p>
+
+                    <div class="glass-card" style="width: 100%; overflow: visible; padding: 0;">
+                        <table style="width: 100%; border-collapse: collapse; min-width: 800px;">
+                            <thead>
+                                <tr style="background: #1e1b4b; color: white;">
+                                    <th style="padding: 1rem; text-align: left; border-top-left-radius: 12px;">Course
+                                    </th>
+                                    <th style="padding: 1rem; text-align: center;">Duration</th>
+                                    <th style="padding: 1rem; text-align: center;">MRP (incl. GST)</th>
+                                    <th
+                                        style="background: #fbbf24; color: #1e1b4b; padding: 1rem; text-align: center; border-top-right-radius: 12px; width: 25%;">
+                                        Your 30% Share<br><span style="font-size: 0.8rem; font-weight: normal;">(Partner
+                                            Net Income)</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 1rem; font-weight: 600;">IELTS / PTE / TOEFL</td>
+                                    <td style="padding: 1rem; text-align: center; color: var(--text-secondary);">1 Month
+                                    </td>
+                                    <td style="padding: 1rem; text-align: center; font-weight: 700;">₹ 15,000</td>
+                                    <td
+                                        style="padding: 1rem; text-align: center; font-weight: 800; color: #b45309; background: #fffbeb;">
+                                        ₹ 4,500</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 1rem; font-weight: 600;">Digital SAT / GRE</td>
+                                    <td style="padding: 1rem; text-align: center; color: var(--text-secondary);">2
+                                        Months</td>
+                                    <td style="padding: 1rem; text-align: center; font-weight: 700;">₹ 32,000</td>
+                                    <td
+                                        style="padding: 1rem; text-align: center; font-weight: 800; color: #b45309; background: #fffbeb;">
+                                        ₹ 9,600</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 1rem; font-weight: 600;">French / German</td>
+                                    <td style="padding: 1rem; text-align: center; color: var(--text-secondary);">2
+                                        Months</td>
+                                    <td style="padding: 1rem; text-align: center; font-weight: 700;">₹ 32,000</td>
+                                    <td
+                                        style="padding: 1rem; text-align: center; font-weight: 800; color: #b45309; background: #fffbeb;">
+                                        ₹ 9,600</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-light); text-align: center;">*
+                        Optional "Live Class" add-ons available (No commission on add-ons). Prices subject to change.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Slide 9: B2B Fees Group -->
+            <div class="slide">
+                <div class="slide-content-wrapper">
+                    <h2 class="section-title">Commercials: Group</h2>
+                    <p class="section-subtitle">Small Group Batches (Per Student Pricing)</p>
+
+                    <div class="glass-card" style="width: 100%; overflow: visible; padding: 0; background: white;">
+                        <table
+                            style="width: 100%; border-collapse: collapse; min-width: 800px; font-family: 'Outfit', sans-serif;">
+                            <thead>
+                                <tr style="color: white; text-align: center;">
+                                    <th
+                                        style="background-color: #009B90; padding: 1rem; text-align: left; border-top-left-radius: 12px; width: 20%;">
+                                        COURSE</th>
+
+                                    <th style="background-color: #1D72B8; padding: 1rem; width: 20%;">MRP (incl. GST)
+                                    </th>
+                                    <th style="background-color: #1D72B8; padding: 1rem; width: 20%;">Your 30% Share
+                                    </th>
+                                    <th style="background-color: #009B90; padding: 1rem; width: 20%;">COURSE DURATION
+                                    </th>
+                                    <th
+                                        style="background-color: #1D72B8; padding: 1rem; border-top-right-radius: 12px; width: 20%;">
+                                        LIVE CLASSES<br><span
+                                            style="font-size: 0.75em; font-weight: normal; opacity: 0.9;">(Optional
+                                            Add-on)</span></th>
+                                </tr>
+                            </thead>
+                            <tbody style="font-weight: 700; color: #333; font-size: 0.95rem;">
+                                <tr style="border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 1rem; text-align: left;">IELTS (AT)</td>
+
+                                    <td style="padding: 1rem; text-align: center;">₹23,000</td>
+                                    <td style="padding: 1rem; text-align: center; color: #F59E0B; font-weight: 800;">
+                                        ₹6,900</td>
+                                    <td style="padding: 1rem; text-align: center; color: #666; font-weight: 500;">1
+                                        Month</td>
+                                    <td style="padding: 1rem; text-align: center; color: #666;">₹8,700</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 1rem; text-align: left;">IELTS (GT)</td>
+
+                                    <td style="padding: 1rem; text-align: center;">₹32,000</td>
+                                    <td style="padding: 1rem; text-align: center; color: #F59E0B; font-weight: 800;">
+                                        ₹9,600</td>
+                                    <td style="padding: 1rem; text-align: center; color: #666; font-weight: 500;">1
+                                        Month</td>
+                                    <td style="padding: 1rem; text-align: center; color: #666;">₹8,700</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 1rem; text-align: left;">PTE / TOEFL-iBT</td>
+
+                                    <td style="padding: 1rem; text-align: center;">₹23,000</td>
+                                    <td style="padding: 1rem; text-align: center; color: #F59E0B; font-weight: 800;">
+                                        ₹6,900</td>
+                                    <td style="padding: 1rem; text-align: center; color: #666; font-weight: 500;">1
+                                        Month</td>
+                                    <td style="padding: 1rem; text-align: center; color: #666;">₹8,700</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 1rem; text-align: left;">CELPIP</td>
+
+                                    <td style="padding: 1rem; text-align: center;">₹32,000</td>
+                                    <td style="padding: 1rem; text-align: center; color: #F59E0B; font-weight: 800;">
+                                        ₹9,600</td>
+                                    <td style="padding: 1rem; text-align: center; color: #666; font-weight: 500;">1
+                                        Month</td>
+                                    <td style="padding: 1rem; text-align: center; color: #666;">₹8,700</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 1rem; text-align: left;">D-SAT</td>
+
+                                    <td style="padding: 1rem; text-align: center;">₹50,000</td>
+                                    <td style="padding: 1rem; text-align: center; color: #F59E0B; font-weight: 800;">
+                                        ₹15,000</td>
+                                    <td style="padding: 1rem; text-align: center; color: #666; font-weight: 500;">1
+                                        Month</td>
+                                    <td style="padding: 1rem; text-align: center; color: #666;">₹15,000</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 1rem; text-align: left;">GRE</td>
+
+                                    <td style="padding: 1rem; text-align: center;">₹50,000</td>
+                                    <td style="padding: 1rem; text-align: center; color: #F59E0B; font-weight: 800;">
+                                        ₹15,000</td>
+                                    <td style="padding: 1rem; text-align: center; color: #666; font-weight: 500;">1
+                                        Month</td>
+                                    <td style="padding: 1rem; text-align: center; color: #666;">₹15,000</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 1rem; text-align: left;">SPOKEN ENGLISH</td>
+
+                                    <td style="padding: 1rem; text-align: center;">₹23,000</td>
+                                    <td style="padding: 1rem; text-align: center; color: #F59E0B; font-weight: 800;">
+                                        ₹6,900</td>
+                                    <td style="padding: 1rem; text-align: center; color: #666; font-weight: 500;">1
+                                        Month</td>
+                                    <td style="padding: 1rem; text-align: center; color: #666;">₹8,700</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 1rem; text-align: left;">FRENCH</td>
+
+                                    <td style="padding: 1rem; text-align: center;">₹41,000</td>
+                                    <td style="padding: 1rem; text-align: center; color: #F59E0B; font-weight: 800;">
+                                        ₹12,300</td>
+                                    <td style="padding: 1rem; text-align: center; color: #666; font-weight: 500;">1
+                                        Month</td>
+                                    <td style="padding: 1rem; text-align: center; color: #666;">₹15,000</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 1rem; text-align: left;">GERMAN</td>
+
+                                    <td style="padding: 1rem; text-align: center;">₹41,000</td>
+                                    <td style="padding: 1rem; text-align: center; color: #F59E0B; font-weight: 800;">
+                                        ₹12,300</td>
+                                    <td style="padding: 1rem; text-align: center; color: #666; font-weight: 500;">1
+                                        Month</td>
+                                    <td style="padding: 1rem; text-align: center; color: #666;">₹15,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 10: Benefits (Updated) -->
+            <div class="slide">
+                <div class="slide-content-wrapper">
+                    <h2 class="section-title">Strategic Choice</h2>
+                    <p class="section-subtitle">Why Partnering with Kanan.co is a Smart Business Decision</p>
+
+                    <div class="grid-dense">
+                        <div class="glass-card"
+                            style="display: flex; gap: 1rem; text-align: left; align-items: flex-start;">
+                            <i class="fas fa-trophy"
+                                style="font-size: 2rem; color: var(--primary); margin-top: 5px;"></i>
+                            <div>
+                                <h4 style="margin-bottom: 0.5rem;">Differentiate & Dominate</h4>
+                                <p style="font-size: 0.9rem; color: var(--text-secondary);">Offer a premium,
+                                    scientifically-proven product that your competitors cannot match. Command higher
+                                    price points.</p>
+                            </div>
+                        </div>
+                        <div class="glass-card"
+                            style="display: flex; gap: 1rem; text-align: left; align-items: flex-start;">
+                            <i class="fas fa-users"
+                                style="font-size: 2rem; color: var(--secondary); margin-top: 5px;"></i>
+                            <div>
+                                <h4 style="margin-bottom: 0.5rem;">Maximize Client Success</h4>
+                                <p style="font-size: 0.9rem; color: var(--text-secondary);">Our <strong
+                                        style="color: var(--accent-amber);">96% success rate</strong> means happier
+                                    clients, more word-of-mouth referrals, and stronger reputation.</p>
+                            </div>
+                        </div>
+                        <div class="glass-card"
+                            style="display: flex; gap: 1rem; text-align: left; align-items: flex-start;">
+                            <i class="fas fa-coins"
+                                style="font-size: 2rem; color: var(--accent-green); margin-top: 5px;"></i>
+                            <div>
+                                <h4 style="margin-bottom: 0.5rem;">Create Lucrative Revenue</h4>
+                                <p style="font-size: 0.9rem; color: var(--text-secondary);">A clear <strong
+                                        style="color: var(--accent-amber);">30% margin</strong> on a high-value service
+                                    directly boosts your bottom line with every enrollment.</p>
+                            </div>
+                        </div>
+                        <div class="glass-card"
+                            style="display: flex; gap: 1rem; text-align: left; align-items: flex-start;">
+                            <i class="fas fa-cogs"
+                                style="font-size: 2rem; color: var(--text-secondary); margin-top: 5px;"></i>
+                            <div>
+                                <h4 style="margin-bottom: 0.5rem;">Simplify Your Operations</h4>
+                                <p style="font-size: 0.9rem; color: var(--text-secondary);">We handle all aspect of
+                                    teaching, technology, and materials. You focus on what you do best: counseling.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 11: Sales Toolkit (Updated) -->
+            <div class="slide">
+                <div class="slide-content-wrapper">
+                    <h2 class="section-title">Your Sales Toolkit</h2>
+                    <p class="section-subtitle"> The Transformative Power of a High Score</p>
+
+                    <div class="grid-dense">
+                        <div class="glass-card" style="border-left: 4px solid #ef4444;">
+                            <h4><i class="fas fa-flag-usa"></i> USA</h4>
+                            <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-secondary);">Access Ivy
+                                League universities. Unlock average scholarships of <strong
+                                    style="color: var(--accent-amber);">$25,000-$50,000</strong> annually.</p>
+                        </div>
+                        <div class="glass-card" style="border-left: 4px solid #3b82f6;">
+                            <h4><i class="fas fa-globe-asia"></i> Australia</h4>
+                            <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-secondary);">Score of
+                                6.5+ bands skips ELICOS, <strong style="color: var(--accent-amber);">saving up to AUD
+                                    $8,000</strong>.</p>
+                        </div>
+                        <div class="glass-card" style="border-left: 4px solid #ef4444;">
+                            <h4><i class="fab fa-canadian-maple-leaf"></i> Canada</h4>
+                            <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-secondary);">Maximize
+                                points in the Express Entry system for a fast-track to Permanent Residence.</p>
+                        </div>
+                        <div class="glass-card" style="border-left: 4px solid #1e40af;">
+                            <h4><i class="fas fa-plane"></i> UK</h4>
+                            <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-secondary);">Gain access
+                                to prestigious Russell Group universities and the 2-year Graduate Route work visa.</p>
+                        </div>
+                        <div class="glass-card" style="border-left: 4px solid #ea580c; grid-column: span 2;">
+                            <h4><i class="fas fa-university"></i> Germany</h4>
+                            <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-secondary);">With 6.5-7.0
+                                bands, clients become eligible for <strong style="color: var(--accent-amber);">Full
+                                    Tuition Fee Waivers</strong> at public universities.</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card"
+                        style="margin-top: 1.5rem; background: #f8fafc; border: 1px solid #e2e8f0; text-align: center;">
+                        <p style="font-weight: 600; color: var(--text-primary);">Overall Impact: Higher scores translate
+                            directly into better admissions, more scholarships, and faster visa approvals.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 12: Next Steps (Updated) -->
+            <div class="slide">
+                <div class="slide-content-wrapper">
+                    <h2 class="section-title">Let's Begin Our Partnership</h2>
+                    <p class="section-subtitle">Start Growing Your Business Today</p>
+
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4rem; width: 100%; max-width: 1000px; position: relative;">
+                        <!-- Connecting Line -->
+                        <div
+                            style="position: absolute; top: 30px; left: 50px; right: 50px; height: 4px; background: #e2e8f0; z-index: -1; border-top: 2px dashed #94a3b8;">
+                        </div>
+
+                        <!-- Step 1 -->
+                        <div style="text-align: center; width: 22%;">
+                            <div
+                                style="width: 60px; height: 60px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; margin: 0 auto 1rem; border: 4px solid white; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                1</div>
+                            <h4 style="margin-bottom: 0.5rem;">Connect</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary);">Reach out to our dedicated
+                                Partner Success Manager.</p>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div style="text-align: center; width: 22%;">
+                            <div
+                                style="width: 60px; height: 60px; background: var(--secondary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; margin: 0 auto 1rem; border: 4px solid white; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                2</div>
+                            <h4 style="margin-bottom: 0.5rem;">Sign</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary);">Complete the simple,
+                                transparent digital Partnership Agreement.</p>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div style="text-align: center; width: 22%;">
+                            <div
+                                style="width: 60px; height: 60px; background: var(--accent-amber); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; margin: 0 auto 1rem; border: 4px solid white; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                3</div>
+                            <h4 style="margin-bottom: 0.5rem;">Onboard</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary);">Attend a comprehensive product
+                                and sales training session.</p>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div style="text-align: center; width: 22%;">
+                            <div
+                                style="width: 60px; height: 60px; background: var(--accent-green); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; margin: 0 auto 1rem; border: 4px solid white; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                4</div>
+                            <h4 style="margin-bottom: 0.5rem;">Enroll</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary);">Start offering the Premium
+                                Personalized Batch.</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card" style="text-align: center; padding: 2rem; max-width: 600px;">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Contact Us</h3>
+                        <div
+                            style="display: flex; flex-direction: column; gap: 0.5rem; align-items: center; font-size: 1.1rem;">
+                            <div><i class="fas fa-envelope" style="color: var(--secondary); margin-right: 10px;"></i>
+                                partners@kanan.co</div>
+                            <div><i class="fas fa-phone" style="color: var(--secondary); margin-right: 10px;"></i>
+                                [Dedicated Partner Helpline]</div>
+                            <div><i class="fas fa-globe" style="color: var(--secondary); margin-right: 10px;"></i>
+                                kanan.co </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Touch Controls -->
+        <!-- Touch Controls -->
+        <nav class="navbar">
+            <button class="nav-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+
+            <div class="progress-wrapper">
+                <div class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">13</span></div>
+                <div class="progress-bar-bg" style="width: 200px;">
+                    <div class="progress-bar-fill" id="progressBar"></div>
+                </div>
+            </div>
+
+            <button class="nav-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+        </nav>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const currentSlideEl = document.getElementById('currentSlide');
+            const totalSlidesEl = document.getElementById('totalSlides');
+            const progressBar = document.getElementById('progressBar');
+            const globalBg = document.getElementById('global-bg-image');
+
+            // Image Mapping
+            const backgroundImages = [
+                'slide_01_cover_1766146585446.png',
+                'slide_02_market_1766146602557.png',
+                'slide_03_challenge_1766146618851.png',
+                'slide_04_solution_1766146639045.png',
+                'slide_05_science_1766146666043.png',
+                'slide_06_portfolio_1766146706556.png',
+                'slide_07_formats_1766146722550.png',
+                'slide_08_partnership_1766146737911.png',
+                'slide_09_pricing_1on1_1766146755758.png',
+                'slide_10_pricing_group_1766146772727.png',
+                'slide_11_benefits_1766146811097.png',
+                'slide_12_success_1766146829991.png',
+                'slide_13_cta_1766146850447.png',
+                'slide_01_cover_1766146585446.png' // Fallback for 14
+            ];
+
+            let currentIndex = 0;
+
+            totalSlidesEl.textContent = totalSlides;
+            updateUI();
+
+            function updateUI() {
+                slides.forEach((slide, index) => {
+                    slide.classList.toggle('active', index === currentIndex);
+                });
+
+                // Update Background
+                if (backgroundImages[currentIndex]) {
+                    globalBg.style.backgroundImage = `url('${backgroundImages[currentIndex]}')`;
+                }
+
+                currentSlideEl.textContent = currentIndex + 1;
+                const progress = ((currentIndex + 1) / totalSlides) * 100;
+                progressBar.style.width = `${progress}%`;
+
+                prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
+                prevBtn.style.pointerEvents = currentIndex === 0 ? 'none' : 'all';
+            }
+
+            function goToSlide(index) {
+                if (index >= 0 && index < totalSlides) {
+                    currentIndex = index;
+                    updateUI();
+                }
+            }
+
+            function nextSlide() { goToSlide(currentIndex + 1); }
+            function prevSlide() { goToSlide(currentIndex - 1); }
+
+            nextBtn.addEventListener('click', () => { nextSlide(); });
+            prevBtn.addEventListener('click', () => { prevSlide(); });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') { nextSlide(); }
+                if (e.key === 'ArrowLeft') { prevSlide(); }
+            });
+        });
+    </script>
+</body>
+
+</html>
